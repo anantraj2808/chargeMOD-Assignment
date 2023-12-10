@@ -1,6 +1,6 @@
 import 'dart:developer';
-
-import 'package:chargemod_assignment/Utilities/color_constants.dart';
+import 'package:chargemod_assignment/utilities/color_constants.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:chargemod_assignment/features/SplashScreen/blocs/app_init_bloc.dart';
 import 'package:chargemod_assignment/features/SplashScreen/blocs/app_init_event.dart';
 import 'package:chargemod_assignment/features/SplashScreen/blocs/app_init_state.dart';
@@ -67,7 +67,24 @@ class _SplashScreenState extends State<SplashScreen> {
                         "assets/images/splash_screen_logo.svg",
                         semanticsLabel: 'chargeMOD Logo'
                     ),
-                  )
+                  ),
+                  SizedBox(height: height*0.3,),
+                  if(state is AppInitInternetStableState)...[
+                    SizedBox(
+                      width: 250,
+                      child: LinearPercentIndicator(
+                        animation: true,
+                        animationDuration: 5500,
+                        lineHeight: 5,
+                        percent: 1,
+                        linearStrokeCap: LinearStrokeCap.butt,
+                        progressColor: ColorConstants.chargemodOrange,
+                        backgroundColor: ColorConstants.chargemodLightestGrey,
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Text("Connecting to chargeMOD", style: TextStyle(fontFamily: "Poppins", fontWeight: FontWeight.w500, color: ColorConstants.chargemodGrey, fontSize: 14),)
+                  ]
                 ],
               ),
             ),
