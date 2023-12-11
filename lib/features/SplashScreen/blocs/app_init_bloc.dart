@@ -26,11 +26,10 @@ class InternetBloc extends Bloc<AppInitEvent, AppInitState>{
   FutureOr<void> appInitRedirectionCheckEvent(AppInitRedirectionCheckEvent event, Emitter<AppInitState> emit) async {
     bool isAlreadyInstalledApp = await SharedPrefs().getBooleanFromCache(SharedPrefs.isAlreadyInstalledApp);
     if(!isAlreadyInstalledApp){
-      SharedPrefs().setBooleanIntoCache(SharedPrefs.isAlreadyInstalledApp, true);
       emit(AppInitFreshInstallState());
     } else {
       bool isUserLoggedIn = await SharedPrefs().getBooleanFromCache(SharedPrefs.isUserLoggedIn);
-      if(!isUserLoggedIn){
+      if(isUserLoggedIn){
         emit(AppInitUserLoggedInState());
       } else {
         emit(AppInitUserLoggedOutState());

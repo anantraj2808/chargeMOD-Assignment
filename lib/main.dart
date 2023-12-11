@@ -1,6 +1,8 @@
+import 'package:chargemod_assignment/features/SplashScreen/Widgets/splash_screen.dart';
+import 'package:chargemod_assignment/features/WelcomeScreens/Widgets/welcome_page_3.dart';
 import 'package:flutter/material.dart';
 
-import 'features/SplashScreen/Widgets/splash_screen.dart';
+import 'features/LoginScreens/Widgets/phone_number_screen.dart';
 
 void main() {
   runApp(const MyApp());

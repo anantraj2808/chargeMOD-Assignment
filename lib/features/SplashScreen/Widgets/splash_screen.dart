@@ -1,4 +1,7 @@
 import 'dart:developer';
+import 'package:chargemod_assignment/features/LoginScreens/Widgets/phone_number_screen.dart';
+import 'package:chargemod_assignment/features/WelcomeScreens/Widgets/welcome_page_2.dart';
+import 'package:chargemod_assignment/features/WelcomeScreens/Widgets/welcome_page_1.dart';
 import 'package:chargemod_assignment/utilities/color_constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:chargemod_assignment/features/SplashScreen/blocs/app_init_bloc.dart';
@@ -49,8 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
             log("Redirect to home page");
           } else if(state is AppInitUserLoggedOutState){
             log("Redirect to login page");
+            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => PhoneNumberScreen()), (route) => false);
           } else if(state is AppInitFreshInstallState){
             log("Redirect to Welcome Screens");
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (conext) => WelcomePage1()));
           }
         },
         builder: (context, state) {
@@ -74,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       width: 250,
                       child: LinearPercentIndicator(
                         animation: true,
-                        animationDuration: 5500,
+                        animationDuration: 5000,
                         lineHeight: 5,
                         percent: 1,
                         linearStrokeCap: LinearStrokeCap.butt,
