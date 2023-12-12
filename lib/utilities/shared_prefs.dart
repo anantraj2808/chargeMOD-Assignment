@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs{
   static const String isUserLoggedIn = "isUserLoggedIn";
   static const String isAlreadyInstalledApp = "isAlreadyInstalledApp";
+  static const String authToken = "authToken";
 
   void setStringIntoCache(String key, String? value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
