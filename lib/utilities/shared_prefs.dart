@@ -4,6 +4,8 @@ class SharedPrefs{
   static const String isUserLoggedIn = "isUserLoggedIn";
   static const String isAlreadyInstalledApp = "isAlreadyInstalledApp";
   static const String authToken = "authToken";
+  static const String refreshToken = "refreshToken";
+  static const String userId = "userId";
 
   void setStringIntoCache(String key, String? value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

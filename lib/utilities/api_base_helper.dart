@@ -23,7 +23,7 @@ class APIBaseHelper{
     log(response.body.toString());
   }
 
-  Future<bool> postRequest(String endPoint, {var queryParam, var headers, required bool isAuthTokenRequired}) async {
+  Future<dynamic> postRequest(String endPoint, {var queryParam, var headers, required bool isAuthTokenRequired}) async {
     String token = await SharedPrefs().getStringFromCache(SharedPrefs.authToken);
     var _headers = {
       "Content-Type" : "application/json",
@@ -41,6 +41,6 @@ class APIBaseHelper{
     log("Query Params = $queryParam");
     log(response.statusCode.toString());
     log(response.body.toString());
-    return response.statusCode >= 200 && response.statusCode <= 300;
+    return response;
   }
 }

@@ -8,4 +8,5 @@ class ColorConstants{
   static const Color white = Color(0xffFFFFFF);
   static const Color red = Colors.red;
   static const Color green = Colors.green;
+  static const Color brightGreen = Color(0xff4EAD2B);
 }
