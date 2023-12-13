@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:chargemod_assignment/bottom_navigation.dart';
 import 'package:chargemod_assignment/features/HomePage/Widgets/home_page.dart';
 import 'package:chargemod_assignment/features/LoginScreens/Widgets/phone_number_screen.dart';
 import 'package:chargemod_assignment/features/WelcomeScreens/Widgets/welcome_page_2.dart';
@@ -51,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           } else if(state is AppInitUserLoggedInState){
             log("Redirect to home page");
-            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => HomePage()), (route) => false);
+            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => BottomNavigation()), (route) => false);
           } else if(state is AppInitUserLoggedOutState){
             log("Redirect to login page");
             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => PhoneNumberScreen()), (route) => false);

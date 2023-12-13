@@ -28,7 +28,7 @@ class APIBaseHelper{
     return response;
   }
 
-  Future<dynamic> postRequest(String endPoint, {var queryParam, var headers, required bool isAuthTokenRequired}) async {
+  Future<dynamic> postRequest(String endPoint, {var queryParam, var headers, required bool isAuthTokenRequired, bool isVersionRequired = true}) async {
     String token = await SharedPrefs().getStringFromCache(SharedPrefs.authToken);
     var _headers = {
       "Content-Type" : "application/json",
@@ -36,12 +36,12 @@ class APIBaseHelper{
     };
     if(headers != null) _headers.addAll(headers);
     final http.Response response = await http.post(
-      Uri.parse(ApiStringConstants.domain + ApiStringConstants.pathVariables + endPoint),
+      Uri.parse(ApiStringConstants.domain + (isVersionRequired ? ApiStringConstants.pathVariables : ApiStringConstants.pathVariablesWithoutVersion) + endPoint),
       body: json.encode(queryParam),
       headers: _headers,
     );
     log("***********************POST***********************");
-    log("POST = " + ApiStringConstants.domain + ApiStringConstants.pathVariables + endPoint);
+    log("POST = " + ApiStringConstants.domain + (isVersionRequired ? ApiStringConstants.pathVariables : ApiStringConstants.pathVariablesWithoutVersion) + endPoint);
     log("Headers = $headers");
     log("Query Params = $queryParam");
     log(response.statusCode.toString());

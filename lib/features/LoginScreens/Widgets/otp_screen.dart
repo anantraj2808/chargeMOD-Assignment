@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:chargemod_assignment/bottom_navigation.dart';
 import 'package:chargemod_assignment/features/HomePage/Widgets/home_page.dart';
 import 'package:chargemod_assignment/features/LoginScreens/blocs/otp_bloc.dart';
 import 'package:chargemod_assignment/features/LoginScreens/blocs/otp_event.dart';
@@ -46,6 +47,12 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    timer30Seconds();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +79,7 @@ class _OTPScreenState extends State<OTPScreen> {
           } else if (state is NavigateToProfileDetailsState){
             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => UpdateProfileScreen(phoneNumber: widget.phoneNumber,)), (route) => false);
           } else if (state is NavigateToHomeState){
-            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => const HomePage()), (route) => false);
+            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => const BottomNavigation()), (route) => false);
           }
         },
         builder: (context, state){
