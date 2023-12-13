@@ -9,9 +9,13 @@ class APIBaseHelper{
   Future<dynamic> getRequest(String endPoint ,{var queryParam, required bool isAuthTokenRequired}) async {
     if(isAuthTokenRequired){
       String token = await SharedPrefs().getStringFromCache(SharedPrefs.authToken);
-      queryParam.addAll(
+      if(queryParam == null) {
+        queryParam = {'Authorization': 'Bearer $token'};
+      } else {
+        queryParam.addAll(
           {'Authorization': 'Bearer $token'}
       );
+      }
     }
     final http.Response response = await http.get(
         Uri.parse(ApiStringConstants.domain + ApiStringConstants.pathVariables + endPoint),
@@ -21,6 +25,7 @@ class APIBaseHelper{
     log("GET = ${ApiStringConstants.domain}${ApiStringConstants.pathVariables}$endPoint");
     log(response.statusCode.toString());
     log(response.body.toString());
+    return response;
   }
 
   Future<dynamic> postRequest(String endPoint, {var queryParam, var headers, required bool isAuthTokenRequired}) async {

@@ -19,19 +19,23 @@ class OTPBloc extends Bloc<OTPEvent, OTPState>{
     emit(OTPInitialState());
     if(response.statusCode >= 200 && response.statusCode <= 300){
       var data = json.decode(response.body);
-      bool isNewUser = response.statusCode == 201;
       String accessToken = data['data']['accessToken'];
       String refreshToken = data['data']['refreshToken'];
       String userId = data['data']['userId'];
       SharedPrefs().setStringIntoCache(SharedPrefs.authToken, accessToken);
       SharedPrefs().setStringIntoCache(SharedPrefs.refreshToken, refreshToken);
       SharedPrefs().setStringIntoCache(SharedPrefs.userId, userId);
+      bool isNewUser = false;
+      await LoginRepo.checkIfNewUser().then((value){
+        var isNewUserData = json.decode(value.body);
+        isNewUser = isNewUserData['data']['user'][0]['firstName'] == null || isNewUserData['data']['user'][0]['firstName'].toString().isEmpty;
+      });
       if(isNewUser){
         emit(NavigateToProfileDetailsState());
       } else {
+        SharedPrefs().setBooleanIntoCache(SharedPrefs.isUserLoggedIn, true);
         emit(NavigateToHomeState());
       }
-      //emit(OTPVerifiedSuccessfullyState());
     } else {
       emit(OTPVerificationFailedState());
     }

@@ -4,4 +4,6 @@ class ApiStringConstants {
   static const String signIn = "signIn";
   static const String verifyOTP = "verify";
   static const String resendOTP = "resend";
+  static const String getCustomer = "get-customer";
+  static const String getLocations = "8.5465282/76.9151412/all-locations?limit=10&page=1";
 }

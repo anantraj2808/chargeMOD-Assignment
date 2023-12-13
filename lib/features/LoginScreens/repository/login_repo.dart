@@ -38,4 +38,15 @@ class LoginRepo{
       return false;
     }
   }
+
+  static Future<dynamic> checkIfNewUser() async {
+    APIBaseHelper helper = APIBaseHelper();
+    try {
+      http.Response response = await helper.getRequest(ApiStringConstants.getCustomer, isAuthTokenRequired: true);
+      return response;
+    } catch (e){
+      log(e.toString());
+      return false;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:chargemod_assignment/features/HomePage/Widgets/home_page.dart';
 import 'package:chargemod_assignment/features/LoginScreens/blocs/otp_bloc.dart';
 import 'package:chargemod_assignment/features/LoginScreens/blocs/otp_event.dart';
 import 'package:chargemod_assignment/features/LoginScreens/blocs/otp_state.dart';
@@ -71,7 +72,7 @@ class _OTPScreenState extends State<OTPScreen> {
           } else if (state is NavigateToProfileDetailsState){
             Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => UpdateProfileScreen(phoneNumber: widget.phoneNumber,)), (route) => false);
           } else if (state is NavigateToHomeState){
-
+            Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => const HomePage()), (route) => false);
           }
         },
         builder: (context, state){
@@ -135,8 +136,8 @@ class _OTPScreenState extends State<OTPScreen> {
                       Spacer(),
                       GestureDetector(
                         onTap: (){
-                          //otpBloc.add(VerifyOTPEvent(otp: otpTEC.text, phoneNumber: widget.phoneNumber));
-                          Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => UpdateProfileScreen(phoneNumber: widget.phoneNumber,)), (route) => false);
+                          otpBloc.add(VerifyOTPEvent(otp: otpTEC.text, phoneNumber: widget.phoneNumber));
+                          //Navigator.pushAndRemoveUntil(context, CupertinoPageRoute(builder: (context) => UpdateProfileScreen(phoneNumber: widget.phoneNumber,)), (route) => false);
                         },
                         child: Container(
                           height: 43,
